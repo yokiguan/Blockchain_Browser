@@ -1,5 +1,5 @@
 <template>
-    <div class="home">
+    <div class="home" >
         <div class="container">
             <div class="home-head">
                 <!--blockChain Statistics-->
@@ -20,9 +20,9 @@
                 </div>
             </div>
            <!--Node statistics-->
-            <div class="home-center">
+            <div class="home-center ">
                 <el-table :data="TbNodesList"  :header-cell-style="bgTable" :row-class-name="tableRowClassName" :cell-style="tableCellStyle"
-                          v-loading="loading3" element-loading-text="数据加载中..."  element-loading-background="rgba(0, 0, 0, 0.8)">
+                          v-loading="loading3" element-loading-text="数据加载中..."  class="list-other" element-loading-background="rgba(0, 0, 0, 0.8)">
                     <el-table-column  label="节点Id"  :show-overflow-tooltip="true" prop="nodeId" align="center">
                         <template slot-scope="scope">
                             <i class="wbs-icon-baocun copy-public-key" style="font-size: 15px;cursor:pointer" @click="copyPubilcKey(scope.row.nodeId)" title="复制"></i>
@@ -40,37 +40,39 @@
                     </el-table-column>
                 </el-table>
             </div>
+            &ensp;&ensp;
             <div class="home-foot">
                 <!--Block list-->
-                <div class="home-foot-box margin-right-10">
+                <div class="home-foot-box margin-left-10">
                     <div class="home-foot-box-nav">
                         <div class="left">
                             <span class="line"></span>
                             <span class="text">区块</span>
                         </div>
                         <div class="right">
-                            <span @click="linkPage('block')" class="table-link" style="padding-right: 30px"> 更多 ></span>
+                            <span @click="linkPage('block')" class="table-link" style="padding-right: 30px">更多 ></span>
                         </div>
                     </div>
                     <div class="home-foot-box-content" v-loading="loading4" element-loading-text="数据加载中..." element-loading-background="rgba(0, 0, 0, 0.8)">
                         <ul>
                             <li class="item" v-for="item in blockList" :key='item.number'>
                                 <div class="left">
-                                    <div @click="linkPage('blockDetail','blockHash',item.blockHash)" class="table-link">区块 {{item.number}}</div>
-                                    <div>{{item.dateTimeStr}}</div>
+                                    <div @click="linkPage('blockDetail','blockHash',item.blockHash)" class="table-link">区块 {{item.number}}&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</div>
+                                    
                                 </div>
                                 <div class="right">
-                                    <div>出块节点
+                               <!-- <div>出块节点&nbsp&nbsp&nbsp
                                         <span class="block-number" :title="item.sealer">{{item.sealer}}</span>
                                     </div>
-                                    <div class="txn" @click="linkPage('transaction','blockHeight',item.number)">{{item.txn}} txns</div>
+                                    <div class="txn" @click="linkPage('transaction','blockHeight',item.number)">{{item.txn}} txns</div>-->
+                                    <div>{{item.dateTimeStr}}</div>
                                 </div>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <!--transaction list-->
-                <div class="home-foot-box margin-left-10">
+                <!--<div class="home-foot-box margin-left-10">
                     <div class="home-foot-box-nav">
                         <div class="left">
                             <span class="line"></span>
@@ -99,15 +101,20 @@
                             </li>
                         </ul>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>
 </template>
 <style>
     .home{
-        width: 100%;
-        background-color: #2a2c3b;
+        width: 80%;
+        background-color: #000066;
+        background-image: url("../../assets/images/header-ng.png");
+        float: right;
+    }
+    .list-other{
+        background-image: url("../../assets/images/header-ng.png");
     }
     .home-head{
         font-size: 0;
@@ -117,8 +124,9 @@
         width: calc(41% - 10px);
         box-sizing: border-box;
         padding: 30px;
-        background-color: #3b3e54;
+        background-color: #3300FF;
         vertical-align: middle;
+        background-image: url("../../assets/images/header-ng.png");
     }
         .lg-width{
             width: 47%;
@@ -127,6 +135,7 @@
         list-style: none;
         margin: 0;
         padding: 0;
+       background-image: url("../../assets/images/bg-one.png");
     }
     .home-head-data ul li{
         display: inline-block;
@@ -136,22 +145,30 @@
         cursor: pointer;
         color: #fff;
         box-sizing: border-box;
+        background-image: linear-gradient(-90deg, #29bdd9 0%, #276ace 100%);
+        text-shadow: 0 0 20px #fdec84,
+                     10px -10px 30px #ffae35,
+                     20px -20px 40px #ec760c,
+                     -20px -60px 50px #cd4607,
+                     0px -80px 60px #973717,
+                     10px -40px 70px #451b0e;
     }
 
 
     .home-head-chart{
         width: calc(59% - 10px) !important;
-        height: 310px;
+        height: 300px;
         vertical-align: middle;
     }
 
     .home-head-chart .el-input__inner{
-        background-color: #3b3e54;
+        background-color: #fff;
         color: #fff;
+        background-image: url("../../assets/images/header-ng.png");
     }
 
     .home-head-chart .el-range-input{
-        background-color: #3b3e54;
+        background-color: #3300FF;
         color: #fff;
     }
    .el-range-separator{
@@ -172,13 +189,30 @@
     
     
     .home-center{
+       /* width: calc(44% - 10px);
+        height: 380px;
+        display: inline-block;
+        box-sizing: border-box;
+        padding: 30px;
+        background-color: #3b3e54;
+        vertical-align: left;
+        margin-top: 20px;*/
+        width: calc(55% - 10px);
+        height: 280px;
+        font-size: 0px;
+        display: inline-block;
+        padding: 30px;
+        background-color: #3300FF;
+        vertical-align: middle;
         margin-top: 20px;
+        background-image: url("../../assets/images/header-ng.png");
     }
     .home-center-table{
-        background-color: #3b3e54;
+        background-color: #3300FF;
+        background-image: url("../../assets/images/header-ng.png");
     }
     .home-center .el-table .table-style{
-        background-color: #3b3e54;
+        background-color: #3300FF;
         color: #fff;
         text-align: center;
         overflow: hidden;
@@ -187,36 +221,37 @@
         -webkit-text-overflow: ellipsis;
         -moz-text-overflow: ellipsis;
         white-space: nowrap; 
-        border-color: #666
+        background-image: url("../../assets/images/header-ng.png");
     }
     .home-center .el-table .table-style:hover{
-        color: #333;
+        color: #3300FF;
     }
     .el-table{
-        border-color: #666 !important;
+        border-color: #fff !important;
     }
     .el-table__body-wrapper{
-        border-color: #666 !important;
+        border-color: #fff !important;
     }
     .el-table table{
-        border-color: #666 !important;
+        border-color: #fff !important;
     }
     .el-table tbody{
-        border-color: #666 !important;
+        border-color: #fff !important;
     }
     .el-table tr{
-        border-color: #666 !important;
+        border-color: #fff !important;
     }
     .el-table th{
-        border-color: #666 !important;
+        border-color: #fff !important;
     }
     .el-table td{
-        border-color: #666 !important;
+        border-color: #fff !important;
     }
     .el-table--border:after, .el-table--group:after, .el-table:before{
-        background-color: #666 !important;
+        background-color: #fff !important;
     }
     .home-center .el-table .name-wrapper{
+        background-color: #3300FF;
         width: 100%;
         height: 100%;
         display: inline-block;
@@ -226,41 +261,55 @@
         white-space: nowrap !important; 
     }
     .home-center .el-table .el-table__empty-block{
-        background-color: #3b3e54;
+        background-color: #3300FF;
     }
     .home-foot{
+        /*margin-top: 20px;
+        font-size: 0;*/
+        
+        height: 280px;
+        font-size: 0px;
+        display: inline-block;
+        padding: 30px;
+        background-color: #3300FF;
+        vertical-align: middle;
         margin-top: 20px;
-        font-size: 0;
+        background-image: url("../../assets/images/header-ng.png");
     }
     .home-foot-box{
         display: inline-block;
-        width: calc(50% - 10px);
         padding-bottom: 20px;
-        background-color: #3b3e54;
+        background-color: #3300FF;
         font-size: 14px;
         color: #fff;
-        vertical-align: top;
+        vertical-align: right;
         box-sizing: border-box;
+        background-image: url("../../assets/images/header-ng.png");
     }
     .home-foot-box-nav{
-        width: 100%;
+        width: 93%;
         height: 50px;
         line-height: 50px;
         margin-left: 15px;
         padding-right: 15px;
         overflow: hidden;
         box-sizing: border-box;
+        background-color: #006699;
+
     }
     .home-foot-box-nav .left{
         float: left;
         width: 50%;
+    }
+    .table-link{
+        color:#fff;
     }
     .home-foot-box-nav .left .line{
         display: inline-block;
         width: 3px;
         height: 14px;
         margin-right: 12px;
-        background-color: #2196f3;
+        background-color: #fff;
         vertical-align: middle;
     }
     .home-foot-box-nav .right{
@@ -275,7 +324,7 @@
         list-style: none;
     }
     .home-foot-box-content .item{
-        border-bottom: 1px solid #999;
+        border-bottom: 1px solid #fff;
         overflow: hidden;
         line-height: 28px;
         padding: 12px 30px;
@@ -301,7 +350,7 @@
         width: 70px;
         height: 28px;
         line-height: 28px;
-        background-color: #2196f3;
+        background-color: #fff;
         color: #fff;
         text-align: center;
         cursor: pointer;
@@ -326,10 +375,10 @@
     }
 
     table{
-        border-color: #999!important;
+        border-color: #fff!important;
     }
     .node-false{
-        color: #f00 !important;
+        color: #fff !important;
     }
     @media screen and (max-width: 1200px){
         .home-head-data{
@@ -359,7 +408,7 @@
             padding: 12px 20px;
         }
         .home-foot-box-content .item .transaction{
-            width: 280px;
+            width: 130px;
             overflow: hidden;
             text-overflow: ellipsis !important;
             white-space: nowrap !important;  
@@ -438,7 +487,7 @@
     }
 </style>
 <script type="text/babel">
-    import {getTbBlcokChainInfo,getTxnByLastFourteenDay,getTbBlockInfo,getTbTransactionInfo,getTbNodeConnection,getAbiFunction,getTbTransactionByPkHash,getAbi} from '@/api/api'
+    import {getTbBlcokChainInfo,getdatalately,gettradelately,getTxnByLastFourteenDay,getdataamount,gettrade,getcopy,getauth,getTbBlockInfo,getTbTransactionInfo,getTbNodeConnection,getAbiFunction,getTbTransactionByPkHash,getAbi} from '@/api/api'
     import { Message } from 'element-ui';
     import {message} from '@/util/util'
     import {timeState,MonthState,MonthNumber,intiDate} from '@/util/util'
@@ -451,6 +500,7 @@
     import errorcode from "@/util/errorCode"
     import '@/assets/css/layout.css'
     import '@/assets/css/public.css'
+
     let minMonthDate = null;
     let maxMonthDate = null;
     let dateTimeBegin = timeState((new Date()).getTime());
@@ -465,14 +515,15 @@
         data: function () {
             return {
                 bgTable: {
-                    backgroundColor: '#3b3e54',
-                    color: '#999',
+                    background: '#006699',
+                    //image: url("../../assets/images/header-ng.png"),
+                    color: '#fff',
                     textAlign: 'center',
-                    borderColor: '#666'
+                    borderColor: '#666',
                 },
                 tableCellStyle: {
                     width: '450px',
-                    borderColor: '#666'
+                    borderColor: '#006699'
                 },
                 totalStatisticsList: constant.TOTAL_STATISTICS_LIST,
                 chartStatistics: {
@@ -493,6 +544,10 @@
                 loading3: false,
                 loading4: false,
                 loading5: false,
+                loading6: false,
+                loading7: false,
+                loading8: false,
+                loading9: false,
                 chainType: this.$route.query.chainType || "01",
                 setInterval: {
                     timer1: null,
@@ -500,6 +555,10 @@
                     timer3: null,
                     timer4: null,
                     timer5: null,
+                    timer6: null,
+                    timer7: null,
+                    timer8: null,
+                    timer9: null,
                 },
                 setSetIntervaling: false,
                 groupId: null,
@@ -517,10 +576,16 @@
                     this.chartStatistics.chartSize.width = this.$refs.chart.offsetWidth;
                     this.chartStatistics.chartSize.height = this.$refs.chart.offsetHeight;
                     this.searchTxnByLastFourteenDay();
+                    this.searchgetdatalately();
+                    this.searchgettradelately();
                     this.searchTbBlcokChainInfo();
                     this.searchTbNodesInfo();
                     this.searchTbBlockInfo();
                     this.searchTbTransactionInfo();
+                    this.searchgetdataamount();
+                    this.searchgettrade();
+                    this.searchgetcopy();
+                    this.searchgetauth();
                 }    
             });
         },
@@ -578,6 +643,12 @@
                 this.setInterval.timer3 = window.setInterval(() => {this.searchTbNodesInfo()}, constant.INTERVALTIME);
                 this.setInterval.timer4 = window.setInterval(() => {this.searchTbBlockInfo()}, constant.INTERVALTIME);
                 this.setInterval.timer5 = window.setInterval(() => {this.searchTbTransactionInfo()}, constant.INTERVALTIME);
+                this.setInterval.timer6 = window.setInterval(() => {this.searchgetdataamount()}, constant.INTERVALTIME);
+                this.setInterval.timer7 = window.setInterval(() => {this.searchgetauth()}, constant.INTERVALTIME);
+                this.setInterval.timer8 = window.setInterval(() => {this.searchgetcopy()}, constant.INTERVALTIME);
+                this.setInterval.timer9 = window.setInterval(() => {this.searchgettrade()}, constant.INTERVALTIME);
+                this.setInterval.timer10 = window.setInterval(() => {this.searchgetdatalately()}, constant.INTERVALTIME);
+                this.setInterval.timer11 = window.setInterval(() => {this.searchgettradelately()}, constant.INTERVALTIME);
             },
             //clear timer
             clear: function () {
@@ -586,6 +657,12 @@
                 window.clearInterval(this.setInterval.timer3);
                 window.clearInterval(this.setInterval.timer4);
                 window.clearInterval(this.setInterval.timer5);
+                window.clearInterval(this.setInterval.timer6);
+                window.clearInterval(this.setInterval.timer7);
+                window.clearInterval(this.setInterval.timer8);
+                window.clearInterval(this.setInterval.timer9);
+                window.clearInterval(this.setInterval.timer10);
+                window.clearInterval(this.setInterval.timer11);
                 Message.closeAll()
             },
             //Page Jump
@@ -636,6 +713,78 @@
                     }
                 })
             },
+
+            searchgetdataamount :function(){
+                this.loading6 = true;
+                getdataamount(this.groupId).then((res)=>{
+                    this.setSetIntervaling = true;
+                //    console.log(res.data.data);
+                    //页面开发
+                }).catch(err =>{
+                    console.log("err in getdataamount");
+                })
+            },
+
+            searchgettrade :function(){
+                this.loading7 = true;
+                gettrade(this.groupId).then((res)=>{
+                    this.setSetIntervaling = true;
+                //    console.log(res.data.data);
+                    //页面开发
+                }).catch(err =>{
+                    console.log("err in getdataamount");
+                })
+            },
+
+            searchgetcopy :function(){
+                this.loading8 = true;
+                getcopy(this.groupId).then((res)=>{
+                    this.setSetIntervaling = true;
+                //    console.log(res.data.data);
+                    //页面开发
+                }).catch(err =>{
+                    console.log("err in getdataamount");
+                })
+            },
+
+            searchgetauth :function(){
+                this.loading9 = true;
+                getauth(this.groupId).then((res)=>{
+                    this.setSetIntervaling = true;
+                //    console.log(res.data.data);
+                    //页面开发
+                }).catch(err =>{
+                    console.log("err in getdataamount");
+                })
+            },
+
+            searchgettradelately: function() {
+                let data = {
+                    groupId: this.groupId,
+                    dateTimeEnd:dataTimeEnd,
+                    dateTimeBegin: dateTimeBegin
+                };
+                gettradelately(data,{}).then(res=>{
+                //    console.log(res.data);
+                }).catch(err =>{
+                    console.log("err in gettradelately");
+                })
+            },
+
+            searchgetdatalately: function() {
+                let data = {
+                    groupId: this.groupId,
+                    dateTimeEnd:dataTimeEnd,
+                    dateTimeBegin: dateTimeBegin
+                };
+                getdatalately(data,{}).then(res=>{
+                //    console.log(res.data);
+                }).catch(err =>{
+                    console.log("err in getdatalately");
+                })
+            },
+
+
             //The amount of transaction information to obtain the current group for a certain period of time
             searchTxnByLastFourteenDay: function () {
                 this.chartStatistics.show = false;
@@ -647,7 +796,10 @@
                     dateTimeEnd:dataTimeEnd,
                     dateTimeBegin: dateTimeBegin
                 };
-                getTxnByLastFourteenDay(data,{}).then( res => {
+                gettradelately(data,{}).then( res => {
+                    // console.log(data.dateTimeEnd);
+                    // console.log(dateTimeBegin);
+                    console.log(res.data);
                     this.loading2 = false;
                     if(res.data.code === 0) {
                         if (res.data.data && res.data.data.length){
@@ -694,6 +846,7 @@
                     type: 1,
                 }
                 getTbNodeConnection(data,query).then(res =>{
+                    console.log(res.data.data);
                     this.loading3 = false;
                     if(res.data.code === 0){
                         if(res.data.data&&res.data.data.length) {
@@ -753,6 +906,7 @@
                     pageSize: 4
                 };
                 getTbTransactionInfo(data,{}).then(res =>{
+                    //console.log(res.data.data);
                     this.loading5 = false;
                     if(res.data.code === 0){
                         if(res.data.data&&res.data.data.length) {

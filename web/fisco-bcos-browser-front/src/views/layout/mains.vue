@@ -1,5 +1,5 @@
 <template>
-    <div style="height:100%;">
+    <div style="height:100%;" class="main-all">
         <div v-loading="loading" element-loading-text="数据加载中..." element-loading-background="rgba(0, 0, 0, 0.8)" style="height: 100%;">
             <v-head ref="head"></v-head>
             <div style="padding-top: 20px" ></div>
@@ -92,6 +92,10 @@
     }
 </script>
 <style>
+    .main-all{
+        background-image: url("../../assets/images/header-ng.png");
+        overflow:scroll;
+    }
     .main{
         width: 100%;
         background-color: #2a2c3b;

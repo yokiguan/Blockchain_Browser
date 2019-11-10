@@ -203,3 +203,48 @@ export function getAbi(data){
         data: data
     })
 }
+
+export function getdataamount(data) {
+    return get({
+        url: `${url.GET_PICTURE_DATAAMOUNT}/${data}`,
+        method: 'get'
+    })
+}
+
+export function gettrade(data) {
+    return get({
+        url: `${url.GET_PICTURE_GETTRADE}/${data}`,
+        method: 'get'
+    })
+}
+
+export function getcopy(data) {
+    return get({
+        url: `${url.GET_PICTURE_GETCOPY}/${data}`,
+        method: 'get'
+    })
+}
+
+export function getauth(data) {
+    return get({
+        url: `${url.GET_PICTURE_GETAUTH}/${data}`,
+        method: 'get'
+    })
+}
+
+export function getdatalately(data,list) {
+    const params = reviseParam(data, list);
+    return get({
+        url: `${url.GET_PICTURE_DATALATELY}/${params.str}`,
+        method: 'get',
+    })
+}
+
+export function gettradelately(data,list) {
+    const params = reviseParam(data, list);
+    return get({
+        url: `${url.GET_PICTURE_TRADELATELY}/${params.str}`,
+        method: 'get',
+        params: params.querys
+    })
+}

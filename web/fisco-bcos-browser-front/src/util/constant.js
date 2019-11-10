@@ -5,7 +5,7 @@ export default {
             label: '当前块高',
             route: 'block',
             class: 'bg-8693f3 margin-right-15 margin-bottom-15',
-            value: 0
+            value: 0,
         },
         {
             label: '交易总量',

@@ -105,127 +105,7 @@
         </div>
     </div>
 </template>
-<style scoped>
-    .hash-content-info-tran{
-        background-color: #2a2c3b;
-        color: #fff;
-        font-size: 14px;
 
-    }
-    .hash-content-info-tran .box{
-        width: 100%;
-        padding: 20px 40px;
-    }
-    .hash-content-info-tran .content{
-        width: 100%;
-        border-top: 1px solid #999;
-        box-sizing: border-box;
-        background-color: #3b3e54;
-    }
-    .hash-content-info-tran .content .title{
-        border-bottom: 1px solid #999;
-        line-height: 40px;
-        padding-top: 20px;
-        padding-left: 20px;
-    }
-    .hash-content-info-tran .pre{
-        white-space: pre-wrap!important;
-        word-wrap: break-word!important;
-        width: calc(100% - 50px)!important;
-        font-size: 14px;
-        line-height: 24px;
-    }
-    .hash-content-label{
-        padding: 5px 30px;
-    }
-    .hash-content-label>.label-title{
-        display: inline-block;
-        width: 120px;
-        text-align: left;
-        padding-right: 10px;
-        box-sizing: border-box;
-        vertical-align: top;
-        color: #111;
-    }
-    .hash-content-label>.receit-content{
-        display: inline-block;
-        width: calc(100% - 300px);
-        max-width: 950px;
-        white-space: pre-wrap!important;
-        word-wrap: break-word!important;
-        border: none;
-    }
-    .label-content{
-        display: inline-block;
-        width: calc(100% - 300px);
-        max-width: 950px;
-        height: auto;
-        padding: 10px;
-        border: 1px solid #eaedf3;
-        border-radius: 4px;
-        font-size: 12px;
-    }
-    .input-data {
-        display: inline-block;
-        width: 100%;
-        /* padding: 10px; */
-        /* max-height: 200px; */
-        overflow: auto;
-        word-break: break-all;
-        word-wrap: break-word;
-        box-sizing: border-box;
-    }
-    .input-data> .item{
-        padding: 5px 0;
-        font-size: 12px;
-    }
-    .input-data> .item> .label{
-        display: inline-block;
-        color:#111;
-        font-weight: bold;
-        width: 80px;
-        vertical-align: top;
-        font-size: 12px;
-        vertical-align: top;
-    }
-    .input-label {
-        padding-bottom: 15px;
-    }
-    .input-label>.label {
-        display: inline-block;
-        color:#111;
-        font-weight: bold;
-        width: 80px;
-        font-size: 12px;
-        vertical-align: top;
-    }
-    .detail-input-content {
-        display: inline-block;
-        height: auto;
-        border-radius: 4px;
-        font-size: 12px;
-    }
-    .tranbox{
-        margin: 20px 30px;
-        background-color: #fff;
-        color: #42b983;
-    }
-    .content>>>.is-top{
-        color: #fff;
-    }
-    .content>>>.is-active{
-        color: #409EFF;
-    }
-    .content>>>#tab-first{
-        padding-left: 15px;
-    }
-    .content>>>#tab-second{
-        padding-left: 30px;
-    }
-    .content>>>.el-tabs__active-bar{
-        padding-left: 20px;
-    }
-</style>
 <script>
     import nav from '@/components/content-nav'
     import {getTbTransactionByPkHash,getTbTransactionReceiptByPkHash,getContractList,getBytecode,getAbiFunction,getAbi} from '@/api/api'
@@ -334,6 +214,7 @@
                     transHash: this.PkHash,    
                 };
                 getTbTransactionByPkHash(data).then(res => {
+                    //console.log(res.data.data);
                     if(res.data.code === 0){
                         if(res.data.data) {
                             this.noDataTransaction = false;
@@ -367,6 +248,7 @@
                     transHash: this.PkHash,
                 };
                 getTbTransactionReceiptByPkHash(data).then(res => {
+                   // console.log(res.data.data);
                     if(res.data.code === 0){
                         if(res.data.data){
                             this.noData = false;
@@ -444,6 +326,7 @@
                 data: [val]
             }
             getBytecode(data,{}).then(res => {
+              //  console.log(res.data.data);
                 if(res.data.code === 0){
                     this.byteCode = res.data.data[0];
                     setTimeout(() => {
@@ -620,3 +503,125 @@
     }
     }
 </script>
+
+<style scoped>
+    .hash-content-info-tran{
+        background-color: #2a2c3b;
+        color: #fff;
+        font-size: 14px;
+
+    }
+    .hash-content-info-tran .box{
+        width: 100%;
+        padding: 20px 40px;
+    }
+    .hash-content-info-tran .content{
+        width: 100%;
+        border-top: 1px solid #999;
+        box-sizing: border-box;
+        background-color: #3b3e54;
+    }
+    .hash-content-info-tran .content .title{
+        border-bottom: 1px solid #999;
+        line-height: 40px;
+        padding-top: 20px;
+        padding-left: 20px;
+    }
+    .hash-content-info-tran .pre{
+        white-space: pre-wrap!important;
+        word-wrap: break-word!important;
+        width: calc(100% - 50px)!important;
+        font-size: 14px;
+        line-height: 24px;
+    }
+    .hash-content-label{
+        padding: 5px 30px;
+    }
+    .hash-content-label>.label-title{
+        display: inline-block;
+        width: 120px;
+        text-align: left;
+        padding-right: 10px;
+        box-sizing: border-box;
+        vertical-align: top;
+        color: #111;
+    }
+    .hash-content-label>.receit-content{
+        display: inline-block;
+        width: calc(100% - 300px);
+        max-width: 950px;
+        white-space: pre-wrap!important;
+        word-wrap: break-word!important;
+        border: none;
+    }
+    .label-content{
+        display: inline-block;
+        width: calc(100% - 300px);
+        max-width: 950px;
+        height: auto;
+        padding: 10px;
+        border: 1px solid #eaedf3;
+        border-radius: 4px;
+        font-size: 12px;
+    }
+    .input-data {
+        display: inline-block;
+        width: 100%;
+        /* padding: 10px; */
+        /* max-height: 200px; */
+        overflow: auto;
+        word-break: break-all;
+        word-wrap: break-word;
+        box-sizing: border-box;
+    }
+    .input-data> .item{
+        padding: 5px 0;
+        font-size: 12px;
+    }
+    .input-data> .item> .label{
+        display: inline-block;
+        color:#111;
+        font-weight: bold;
+        width: 80px;
+        vertical-align: top;
+        font-size: 12px;
+        vertical-align: top;
+    }
+    .input-label {
+        padding-bottom: 15px;
+    }
+    .input-label>.label {
+        display: inline-block;
+        color:#111;
+        font-weight: bold;
+        width: 80px;
+        font-size: 12px;
+        vertical-align: top;
+    }
+    .detail-input-content {
+        display: inline-block;
+        height: auto;
+        border-radius: 4px;
+        font-size: 12px;
+    }
+    .tranbox{
+        margin: 20px 30px;
+        background-color: #fff;
+        color: #42b983;
+    }
+    .content>>>.is-top{
+        color: #fff;
+    }
+    .content>>>.is-active{
+        color: #409EFF;
+    }
+    .content>>>#tab-first{
+        padding-left: 15px;
+    }
+    .content>>>#tab-second{
+        padding-left: 30px;
+    }
+    .content>>>.el-tabs__active-bar{
+        padding-left: 20px;
+    }
+</style>

@@ -60,7 +60,7 @@
                                     <div>{{item.dateTimeStr}}</div>
                                 </div>
                                 <div class="right">
-                                    <div>出块节点&nbsp&nbsp&nbsp
+                                    <div>出块节点
                                         <span class="block-number" :title="item.sealer">{{item.sealer}}</span>
                                     </div>
                                     <div class="txn" @click="linkPage('transaction','blockHeight',item.number)">{{item.txn}} txns</div>

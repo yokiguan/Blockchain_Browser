@@ -1,6 +1,7 @@
 let api = process.env.API_PATH;
 
 export default {
+
     GET_TBBLOCK_CHAIN_INFO: `${api}/home/blockChainInfo`,  //get blockChain overview
 
     GET_TXNBY_LASTFOURTEENDAY: `${api}/home/txnLately`, //The amount of transaction information to obtain the current group for a certain period of time

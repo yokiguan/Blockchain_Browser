@@ -1,8 +1,6 @@
-
 <template>
-    <div class="search-main" style="height: auto;">
+    <div class="search-main search-trans" style="height: auto;">
         <div class="container">
-            <v-nav :hrTitle="title" :hrcontent="title" :route="'transaction'"></v-nav>
             <div class="search-nav">
                 <div class="hashInput">
                     <el-input placeholder="请输入交易哈希或块高" v-model="searchKeyValue" class="input-with-select">
@@ -38,11 +36,7 @@
                         </template>
                     </el-table-column>
                 </el-table>
-                <div class="search-pagation">
-                    <div style="line-height: 40px">
-                        <span>查询结果 : </span>
-                        <span>共计{{pagination.total}}条数据</span>
-                    </div>
+                <div align="center" class="search-pagation">
                     <el-pagination
                         layout="sizes,prev, pager, next"
                         :total="pagination.total"
@@ -57,6 +51,22 @@
         </div>
     </div>
 </template>
+<style>
+.searchblock-nav{
+    width:100%
+}
+.search-trans{
+    width: 80%;
+    margin-left: 20%;
+    background-color: #3b3e54;
+    color: #fff;
+}
+.search-result{
+    margin-right: 40%;
+    color: #fff;
+    /*background-color:  #3b3e54;*/
+}
+</style>
 <script type="es6">
     import nav from '@/components/content-nav'
     import {getTbTransactionInfo} from '@/api/api'
@@ -73,7 +83,6 @@
     let minMonthDate = null;
     let maxMonthDate = null;
     let months = MonthState((new Date()).getTime())
-
     export default {
         name: 'transaction',
         components: {

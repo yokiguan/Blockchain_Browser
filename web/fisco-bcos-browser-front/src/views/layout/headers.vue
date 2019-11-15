@@ -7,7 +7,7 @@
       <div class="nav-content" @click="routerLink('home')">首页</div>
       <div class="nav-content" @click="routerLink('block')">区块</div>
       <div class="nav-content" @click="routerLink('transaction')">交易</div>
-      <div class="nav-title">图片信息</div>
+      <div class="nav-title" @click="routerLink('pictureHome')">图片信息</div>
       <hr class="nav-line" />
        <div class="nav-content">图片总量</div>
       <div class="nav-content">交易图片总量</div>
@@ -156,13 +156,11 @@ export default {
   background-color: #a5d8fa;
   width: 20%;
   height: 100%;
-
   background-image: url("../../assets/images/barBackground.png");
   background-size: 85%;
   background-repeat: no-repeat;
   font-size: 14px;
   color: #fff;
-
   padding-bottom: 100%;
 }
 .nav-header .logo {

@@ -161,7 +161,7 @@
         vertical-align: middle;
     }
 
-    .home-head-chart .el-input__inner{
+    .home-head-chart .el-input__inner {
         background-color: #fff;
         color: #fff;
         background-image: url("../../assets/images/header-ng.png");
@@ -796,7 +796,7 @@
                     dateTimeEnd:dataTimeEnd,
                     dateTimeBegin: dateTimeBegin
                 };
-                gettradelately(data,{}).then( res => {
+                getTxnByLastFourteenDay(data,{}).then( res => {
                     // console.log(data.dateTimeEnd);
                     // console.log(dateTimeBegin);
                     console.log(res.data);

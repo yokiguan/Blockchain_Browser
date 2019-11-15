@@ -42,6 +42,14 @@ const routes = [
                 component: resolve => require(['@/views/components/home'],resolve),
             },
             {
+                path: '/pictureHome',
+                name: 'pictureHome',
+                meta: {
+                    requireAuth: true, //
+                },
+                component: resolve => require(['@/views/components/pictureHome'],resolve),
+            },
+            {
                 path: '/blankPage',
                 name: 'blankPage',
                 meta: {

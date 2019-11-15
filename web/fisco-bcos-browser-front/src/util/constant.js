@@ -26,6 +26,32 @@ export default {
             value: 0
         }
     ],
+    TOTAL_PICTURE_LIST: [
+        {
+            label: '上链素材总量',
+            route: 'block',
+            class: 'bg-8693f3 margin-right-15 margin-left-15',
+            value: 0,
+        },
+        {
+            label: '图片交易数量',
+            route: 'transaction',
+            class: 'bg-bc8dee margin-right-15',
+            value: 0
+        },
+        {
+            label: '图片侵权数量',
+            route: '',
+            class: 'bg-ffa897 margin-right-15',
+            value: 0
+        },
+        {
+            label: '图片确权总数',
+            route: '',
+            class: 'bg-89c3f8 margin-right-15',
+            value: 0
+        }
+    ],
     MENU_LIST: [
         {
             title: '配置',

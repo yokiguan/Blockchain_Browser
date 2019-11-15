@@ -54,14 +54,14 @@
     padding-left: 2px;
 
 }
-.input-with-select .el-input__inner {
+.input-with-select .el-input__inner .el-picture__inner{
     width: 540px;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     /* border: 1px solid #eaedf3; */
     box-shadow: 0 3px 11px 0 rgba(159, 166, 189, 0.11);
 }
-.input-with-select .el-input--suffix > .el-input__inner {
+.input-with-select .el-input--suffix > .el-input__inner .el-picture__inner{
     box-shadow: none;
 }
 .input-with-select .el-input-group__prepend {

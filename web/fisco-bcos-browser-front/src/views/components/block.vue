@@ -1,8 +1,7 @@
 <template>
-    <div class="search-main" style="height: auto;">
+    <div class="search-main search-block " style="height: auto;">
         <div class="container">
-           <v-nav :hrTitle="btitle" :hrcontent="btitle" :route="'block'"></v-nav>
-            <div class="search-nav">
+            <div class="searchblock-nav search-nav">
                 <div class="hashInput">
                     <el-input placeholder="请输入区块哈希或块高" v-model="searchKeyValue" class="input-with-select">
                         <el-button slot="append" icon="el-icon-search" @click="search" :disabled="submitDisabled"></el-button>
@@ -29,11 +28,8 @@
                         </template>
                     </el-table-column>
                 </el-table>
-                <div class="search-pagation">
-                    <div style="line-height: 40px;">
-                    <span>查询结果 : </span>
-                    <span>共计{{pagination.total}}条数据</span>
-                    </div>
+                <div align="right" class="search-pagation">
+                    
                     <el-pagination style="display: inline-block"
                         layout="sizes,prev, pager, next"
                         :total="pagination.total"
@@ -49,6 +45,15 @@
     </div>
 </template>
 <style>
+.searchblock-nav{
+    width:100%
+}
+.search-block{
+    width: 80%;
+    margin-left: 20%;
+    background-color: #3b3e54;
+    color: #fff;
+}
 </style>
 <script type="es6">
     import nav from '@/components/content-nav'
@@ -62,7 +67,6 @@
     import errorcode from "@/util/errorCode"
     import '@/assets/css/layout.css'
     import '@/assets/css/public.css'
-
     let minMonthDate = null;
     let maxMonthDate = null;
     let months = MonthState((new Date()).getTime())
@@ -174,7 +178,6 @@
                             }
                             this.blockList = res.data.data;
                             this.pagination.total = res.data.totalCount;
-
                         }else{
                             this.blockList = [];
                             this.pagination.total = res.data.totalCount;

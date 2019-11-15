@@ -11,6 +11,7 @@
 
 /*查看区块 查看交易搜索面板样式*/
 .search-main{
+    width: 100%;
     height: calc(100% - 120px);
     background-color: #2a2c3b;
     padding-bottom: 20px

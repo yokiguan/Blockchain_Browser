@@ -17,6 +17,7 @@
     "echarts": "^4.1.0",
     "element-ui": "^2.3.9",
     "es6-promise": "^4.2.5",
+    "module": "^1.2.5",
     "solc": "^0.4.25",
     "vue": "^2.4.2",
     "vue-clipboard2": "^0.3.0",

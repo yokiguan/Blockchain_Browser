@@ -57,7 +57,7 @@
                         <ul>
                             <li class="item" v-for="item in blockList" :key='item.number'>
                                 <div class="left">
-                                    <div @click="linkPage('blockDetail','blockHash',item.blockHash)" class="table-link">区块 {{item.number}}&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</div>
+                                    <div @click="linkPage('blockDetail','blockHash',item.blockHash)" class="table-link">区块 {{item.number}}&ensp;&ensp;&ensp;&ensp;</div>
                                     
                                 </div>
                                 <div class="right">
@@ -189,15 +189,7 @@
     
     
     .home-center{
-       /* width: calc(44% - 10px);
-        height: 380px;
-        display: inline-block;
-        box-sizing: border-box;
-        padding: 30px;
-        background-color: #3b3e54;
-        vertical-align: left;
-        margin-top: 20px;*/
-        width: calc(55% - 10px);
+        width: calc(55% - 7px);
         height: 280px;
         font-size: 0px;
         display: inline-block;
@@ -264,10 +256,10 @@
         background-color: #3300FF;
     }
     .home-foot{
-        /*margin-top: 20px;
-        font-size: 0;*/
-        
+        margin-top: 20px;
+        font-size: 0;
         height: 280px;
+        width:32.5%;
         font-size: 0px;
         display: inline-block;
         padding: 30px;
@@ -283,6 +275,7 @@
         font-size: 14px;
         color: #fff;
         vertical-align: right;
+        width :100%;
         box-sizing: border-box;
         background-image: url("../../assets/images/header-ng.png");
     }
@@ -295,7 +288,6 @@
         overflow: hidden;
         box-sizing: border-box;
         background-color: #006699;
-
     }
     .home-foot-box-nav .left{
         float: left;

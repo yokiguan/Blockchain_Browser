@@ -2,7 +2,7 @@
     <div class="picture-home" >
         <div class="container">
             <div class="picture-home-head">
-                <!--blockChain Statistics-->
+                <!--上联素材总量，图片交易数量，图片侵权数量，图片确权总数-->
                 <div class="picture-home-head-data"
                      v-loading="loading1" element-loading-text="数据加载中..."  element-loading-background="rgba(0, 0, 0, 0.8)">
                     <ul>
@@ -11,15 +11,27 @@
                             <span class="picture-home-head-data-content"> {{item.value}}</span>
                         </li>
                     </ul>
+                    
                 </div>
-                <!--Chart statistics-->
-                 <div class="picture-home-head-chart margin-left-10" ref="chart" v-loading="loading2"  element-loading-text="数据加载中..." element-loading-background="rgba(0, 0, 0, 0.8)">
-                    <v-chart ref="linechart" :type="'line'" :id="'homeId'" :data="chartStatistics.date"
-                             :transactionDataArr="chartStatistics.dataArr" :size="chartStatistics.chartSize" :title="'home'"></v-chart>
+                <!--交易走势-->
+                <div class="picture-home-trade-chart" ref="chart" v-loading="loading2"  element-loading-text="数据加载中..." element-loading-background="rgba(0, 0, 0, 0.8)">
+                    <v-chart ref="linechart" :type="'line'" :id="'homeId'" :data="tradelately.date"
+                             :transactionDataArr="tradelately.dataArr" :size="tradelately.chartSize" :title="'home'"></v-chart>
                 </div>
+
+                <!--上链图片走势-->
+                <!-- <div class="picture-home-data-chart" ref="chart" v-loading="loading3"  element-loading-text="数据加载中...">
+                    <v-chart ref="linechart" :type="'line'" :id="'homeId'" :data="datalately.date"
+                             :transactionDataArr="datalately.dataArr" :size="datalately.chartSize" :title="'home'"></v-chart>
+                </div> -->
+                
+                
+
             </div>
+
            <!--Node statistics-->
         </div>
+        
     </div>
 </template>
 <style>
@@ -70,32 +82,53 @@
         font-size: 18px;
     }
 
-    .picture-home-head-data-content{
+     .picture-home-head-data-content{
         display: block;
         color: white;
         font-size: 40px;
         text-align: right;
     }
     
-   .picture-home-head-chart{
+   .picture-home-trade-chart{
         padding-top: 200px;
         width: calc(59% - 10px) !important;
         height: 300px;
         vertical-align: middle;
     }
 
-    .picture-home-head-chart .el-picture__inner{
+    .picture-home-trade-chart .el-picture__inner{
         background-color: #fff;
         color: #fff;
         background-image: url("../../assets/images/header-ng.png");
     }
 
-    .picture-home-head-chart .el-range-picture{
+    .picture-home-trade-chart .el-range-picture{
         background-color: #3300FF;
         color: #fff;
     }.el-range-separator{
         color: #fff !important;
     }
+
+    .picture-home-data-chart{
+        padding-top: 200px;
+        width: calc(59% - 10px) !important;
+        height: 300px;
+        vertical-align: middle;
+    }
+
+    .picture-home-data-chart .el-picture__inner{
+        background-color: #fff;
+        color: #fff;
+        background-image: url("../../assets/images/header-ng.png");
+    }
+
+    .picture-home-data-chart .el-range-picture{
+        background-color: #3300FF;
+        color: #fff;
+    }.el-range-separator{
+        color: #fff !important;
+    }
+
 
     @media screen and (max-width: 1000px){
         .home-head-data{
@@ -161,7 +194,7 @@
     }
 </style>
 <script type="text/babel">
-    import {getTbBlcokChainInfo,getdatalately,gettradelately,getTxnByLastFourteenDay,getdataamount,gettrade,getcopy,getauth} from '@/api/api'
+    import {getTbBlcokChainInfo,getdatalately,gettradelately,getdataamount,gettrade,getcopy,getauth} from '@/api/api'
     import { Message } from 'element-ui';
     import {message} from '@/util/util'
     import {timeState,MonthState,MonthNumber,intiDate} from '@/util/util'
@@ -189,7 +222,17 @@
         data: function () {
             return {
                 totalPictureList: constant.TOTAL_PICTURE_LIST,
-                chartStatistics: {
+                tradelately: {
+                    chartSize:{
+                        width: 0,
+                        height: 0
+                    },
+                    date: [],
+                    dataArr: [],
+                    show: false,
+                    // time: months,
+                },
+                datalately: {
                     chartSize:{
                         width: 0,
                         height: 0
@@ -231,15 +274,17 @@
                 this.groupId = localStorage.getItem("groupId")
                 if(this.groupId){
                     // this.getContracts();
-                    this.chartStatistics.chartSize.width = this.$refs.chart.offsetWidth;
-                    this.chartStatistics.chartSize.height = this.$refs.chart.offsetHeight;
-                    this.searchFourteenDayTrade();
+                    this.tradelately.chartSize.width = this.$refs.chart.offsetWidth;
+                    this.tradelately.chartSize.height = this.$refs.chart.offsetHeight;
+                    this.datalately.chartSize.width = this.$refs.chart.offsetWidth;
+                    this.datalately.chartSize.height = this.$refs.chart.offsetHeight;
+                    this.searchgettradelately();
                     this.searchgetdatalately();
-                    this.searchTbBlcokChainInfo();
-                    this.searchgetdataamount();
-                    this.searchgettrade();
-                    this.searchgetcopy();
-                    this.searchgetauth();
+                    this.searchPictureInfo();
+                    //this.searchgetdataamount();
+                    //this.searchgettrade();
+                    //this.searchgetcopy();
+                    //this.searchgetauth();
                 }    
             });
         },
@@ -275,8 +320,10 @@
             }
             },
             changChart: function (val) {
-                this.chartStatistics.time = MonthState(val);
-                this.searchFourteenDayTrade()
+                this.tradelately.time = MonthState(val);
+                this.datalately.time = MonthState(val);
+                this.searchgettradelately();
+                this.searchgetdatalately();
             },
             dateBlur: function (val) {
                 if(val.value && val.value.length){
@@ -292,23 +339,15 @@
             },
             //create timer
             setSetInterval: function () {
-                this.setInterval.timer1 = window.setInterval(() => {this.searchFourteenDayTrade()}, constant.INTERVALTIME);
-                this.setInterval.timer2 = window.setInterval(() => {this.searchTbBlcokChainInfo()}, constant.INTERVALTIME);
-                this.setInterval.timer3 = window.setInterval(() => {this.searchgetdataamount()}, constant.INTERVALTIME);
-                this.setInterval.timer4 = window.setInterval(() => {this.searchgetauth()}, constant.INTERVALTIME);
-                this.setInterval.timer5 = window.setInterval(() => {this.searchgetcopy()}, constant.INTERVALTIME);
-                this.setInterval.timer6 = window.setInterval(() => {this.searchgettrade()}, constant.INTERVALTIME);
-                this.setInterval.timer7 = window.setInterval(() => {this.searchgetdatalately()}, constant.INTERVALTIME);
+                this.setInterval.timer1 = window.setInterval(() => {this.searchgettradelately()}, constant.INTERVALTIME);
+                this.setInterval.timer2 = window.setInterval(() => {this.searchPictureInfo()}, constant.INTERVALTIME);
+                this.setInterval.timer3 = window.setInterval(() => {this.searchgetdatalately()}, constant.INTERVALTIME);
             },
             //clear timer
             clear: function () {
                 window.clearInterval(this.setInterval.timer1);
                 window.clearInterval(this.setInterval.timer2);
                 window.clearInterval(this.setInterval.timer3);
-                window.clearInterval(this.setInterval.timer4);
-                window.clearInterval(this.setInterval.timer5);
-                window.clearInterval(this.setInterval.timer6);
-                window.clearInterval(this.setInterval.timer7);
                 Message.closeAll()
             },
             //Page Jump
@@ -325,132 +364,113 @@
                     }
                 }
             },
-            //get blockChain overview ，  start the timer after receiving the correct response
-            searchTbBlcokChainInfo : function () {
+            //上联素材总量，图片交易数量，图片侵权数量，图片确权总数
+            searchPictureInfo : function () {
                 this.loading1 = true;
-                this.loading6 = true;
                 getdataamount(this.groupId).then((res)=>{
                     this.setSetIntervaling = true;
-                    localStorage.setItem("pictureamount",res.data.data);
+                    this.totalPictureList[0].value = res.data.data;
                 }).catch(err =>{
                     console.log("err in getdataamount");
                 })
             
-                this.loading7 = true;
                 gettrade(this.groupId).then((res)=>{
                     this.setSetIntervaling = true;
-                    localStorage.setItem("picturetrade",res.data.data);
-                    //console.log(res.data.data);
+                    this.totalPictureList[1].value = res.data.data;
                 }).catch(err =>{
                     console.log("err in getdataamount");
                 })
 
-                this.loading8 = true;
                 getcopy(this.groupId).then((res)=>{
                     this.setSetIntervaling = true;
-                    localStorage.setItem("picturecopy",res.data.data);
-                    //console.log(res.data.data);
+                    this.totalPictureList[2].value = res.data.data;
                 }).catch(err =>{
                     console.log("err in getdataamount");
                 })
 
-
-                this.loading9 = true;
                 getauth(this.groupId).then((res)=>{
                     this.setSetIntervaling = true;
-                    localStorage.setItem("pictureauth",res.data.data);
-                    //console.log(res.data.data);
+                    this.totalPictureList[3].value = res.data.data;
                 }).catch(err =>{
                     console.log("err in getdataamount");
                 })
-
-
-                getTbBlcokChainInfo(this.groupId).then((res) =>{
-                    this.setSetIntervaling = true;
-                    this.loading1 = false;
-                    let data={
-                        pictureamount : localStorage.getItem("pictureamount"),
-                        picturetrade : localStorage.getItem("picturetrade"),
-                        picturecopy : localStorage.getItem("picturecopy"),
-                        pictureauth : localStorage.getItem("pictureauth")
-                    };
-                    //console.log(data.pictureamount);
-                    if(res.data.code === 0){
-                        if(res.data.data){
-                            this.totalPictureList[0].value = data.pictureamount;
-                            this.totalPictureList[1].value = data.picturetrade;
-                            this.totalPictureList[2].value = data.pictureamount;
-                            this.totalPictureList[3].value = data.pictureauth;
-                        }else{
-                            for (let i = 0; i < this.totalPictureList.length; i++){
-                                this.totalPictureList[i].value = 0;
-                            }
-                        }
-                    }else{
-                        message(errorcode[res.data.code].cn,'error');
-                        for (let i = 0; i < this.totalPictureList.length; i++){
-                            this.totalPictureList[i].value = 0;
-                        }
-                    }
-                }).catch(err => {
-                    this.clear();
-                    this.loading1 = false;
-                    for (let i = 0; i < this.totalPictureList.length; i++){
-                        this.totalPictureList[i].value = 0;
-                    }
-                    if(err.response && err.response.status !== 200){
-                        message(constant.ERROR,'error');
-                    }
-                })
+                this.setSetIntervaling = true;
+                this.loading1 = false;
+                        
             },
 
-
-            searchgetdatalately: function() {
+           //上链素材走势图
+            searchgetdatalately: function () {
+                this.datalately.show = false;
+                this.loading3 = true;
+                this.datalately.date = [];
+                this.datalately.dataArr = [];
                 let data = {
                     groupId: this.groupId,
                     dateTimeEnd:dataTimeEnd,
                     dateTimeBegin: dateTimeBegin
                 };
-                getdatalately(data,{}).then(res=>{
-                }).catch(err =>{
-                    console.log("err in getdatalately");
+                getdatalately(data,{}).then( res => {
+                    this.loading3 = false;
+                    if(res.data.code === 0) {
+                        if (res.data.data && res.data.data.length){
+                            res.data.data = intiDate(res.data.data);
+                            for (let i = 0; i < res.data.data.length; i++) {
+                                this.datalately.date.push(res.data.data[i].dateStr);
+                                this.datalately.dataArr.push(res.data.data[i].txn);
+                            }
+                        }else{
+                            res.data.data = intiDate(res.data.data);
+                            for (let i = 0; i < res.data.data.length; i++) {
+                                this.datalately.date.push(res.data.data[i].dateStr);
+                                this.datalately.dataArr.push(res.data.data[i].txn);
+                            }
+                        }
+                        this.datalately.show = true;
+                    }else{
+                        this.datalately.show = true;
+                        message(errorcode[res.data.code].cn,'error');
+                    }
+                }).catch(err => {
+                    this.clear();
+                    this.loading3 = false;
+                    if(err.response && err.response.status !== 200){
+                        message(constant.ERROR,'error');
+                    }
+                    this.datalately.show = true;
                 })
             },
 
-
-            //The amount of transaction information to obtain the current group for a certain period of time
-            searchFourteenDayTrade: function () {
-                this.chartStatistics.show = false;
+            //图片交易趋势函数
+            searchgettradelately: function () {
+                this.tradelately.show = false;
                 this.loading2 = true;
-                this.chartStatistics.date = [];
-                this.chartStatistics.dataArr = [];
+                this.tradelately.date = [];
+                this.tradelately.dataArr = [];
                 let data = {
                     groupId: this.groupId,
                     dateTimeEnd:dataTimeEnd,
                     dateTimeBegin: dateTimeBegin
                 };
                 gettradelately(data,{}).then( res => {
-                    // console.log(data.dateTimeEnd);
-                    // console.log(dateTimeBegin);
-                    //console.log(res.data);
                     this.loading2 = false;
                     if(res.data.code === 0) {
                         if (res.data.data && res.data.data.length){
                             res.data.data = intiDate(res.data.data);
                             for (let i = 0; i < res.data.data.length; i++) {
-                                this.chartStatistics.date.push(res.data.data[i].dateStr);
-                                this.chartStatistics.dataArr.push(res.data.data[i].txn);
+                                this.tradelately.date.push(res.data.data[i].dateStr);
+                                this.tradelately.dataArr.push(res.data.data[i].txn);
                             }
                         }else{
                             res.data.data = intiDate(res.data.data);
                             for (let i = 0; i < res.data.data.length; i++) {
-                                this.chartStatistics.date.push(res.data.data[i].dateStr);
-                                this.chartStatistics.dataArr.push(res.data.data[i].txn);
+                                this.tradelately.date.push(res.data.data[i].dateStr);
+                                this.tradelately.dataArr.push(res.data.data[i].txn);
                             }
                         }
-                        this.chartStatistics.show = true;
+                        this.tradelately.show = true;
                     }else{
-                        this.chartStatistics.show = true;
+                        this.tradelately.show = true;
                         message(errorcode[res.data.code].cn,'error');
                     }
                 }).catch(err => {
@@ -459,20 +479,16 @@
                     if(err.response && err.response.status !== 200){
                         message(constant.ERROR,'error');
                     }
-                    this.chartStatistics.show = true;
+                    this.tradelately.show = true;
                 })
             },
             dateChange: function () {
-                this.searchFourteenDayTrade();
+                this.searchgettradelately();
+                this.searchgetdatalately();
                 minMonthDate = null;
                 maxMonthDate = null;
             },
 
         },
-        filters: {
-            toUpperCase: function(value){
-                return value.toUpperCase();
-            }
-        }
     }
 </script>

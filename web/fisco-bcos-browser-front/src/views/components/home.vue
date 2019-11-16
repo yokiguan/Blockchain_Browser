@@ -17,6 +17,8 @@
                 <div class="home-head-chart home-head-data margin-left-10" ref="chart" v-loading="loading2"  element-loading-text="数据加载中..." element-loading-background="rgba(0, 0, 0, 0.8)">
                     <v-chart ref="linechart" :type="'line'" :id="'homeId'" :data="chartStatistics.date"
                              :transactionDataArr="chartStatistics.dataArr" :size="chartStatistics.chartSize" :title="'home'"></v-chart>
+                             <v-chart ref="linechart" :type="'line'" :id="'homeId'" :data="chartStatistics.date"
+                             :transactionDataArr="chartStatistics.dataArr" :size="chartStatistics.chartSize" :title="'home'"></v-chart>
                 </div>
             </div>
            <!--Node statistics-->

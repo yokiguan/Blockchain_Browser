@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="search-transactiondetail">
         <div class="search-main padding-bottom-0">
             <div class="container padding-bottom-0">
                 <v-nav :page='page' :hrTitle="'交易'" :navContent="PkHash" :navSubtitle="'交易'" :hrcontent="'交易信息'" :route="'transaction'"></v-nav>
@@ -105,6 +105,15 @@
         </div>
     </div>
 </template>
+
+<style scoped>
+    .search-transactiondetail{
+        width: 80%;
+        margin-left: 20%;
+        background-color: #3b3e54;
+        color: #fff;
+    }
+</style>
 
 <script>
     import nav from '@/components/content-nav'

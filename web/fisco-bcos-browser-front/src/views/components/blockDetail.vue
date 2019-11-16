@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <div class="search-main padding-bottom-0">
+    <div class="search-blockdetail">
+        <div class="search-main  padding-bottom-0">
             <div class="container padding-bottom-0">
                 <v-nav :page='page' :hrTitle="'区块'" :navContent="blockName" :navSubtitle="'区块'" :hrcontent="'区块信息'" :route="'block'"></v-nav>
                 <div class="detail-content">
@@ -27,6 +27,12 @@
     </div>
 </template>
 <style scoped>
+    .search-blockdetail{
+        width: 80%;
+        margin-left: 20%;
+        background-color: #3b3e54;
+        color: #fff;
+    }
     .content>>>.jv-code{
         max-height: none;
     }

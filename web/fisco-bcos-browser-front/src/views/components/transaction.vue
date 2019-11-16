@@ -61,10 +61,6 @@
     background-color: #3b3e54;
     color: #fff;
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 9b20eff1f3f91fb53bdb248c27200d31e07d3630
 .search-result{
     margin-right: 40%;
     color: #fff;
